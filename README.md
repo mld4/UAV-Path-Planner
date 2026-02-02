@@ -1,6 +1,10 @@
 # PathPlanner
 
-**PathPlanner** is a professional Python package for autonomous UAV (Unmanned Aerial Vehicle) path planning. It generates optimized lawnmower-style flight paths for multi-UAV coverage of search areas, handling complex polygons with holes, altitude assignments, and QGroundControl mission exports. Designed for applications like avalanche search, agriculture, or surveillance, it ensures efficient, collision-free paths with cost-based UAV assignment.
+## Introduction
+
+This project was developed as a semester project to explore path planning for multi-drone search and rescue (SAR) missions. It serves as a foundational tool for planning efficient paths for 1-4 drones to systematically search defined areas. In real-world applications, inputs could be simplified to just GPS points for the search area—such as drawing a rectangle on a tablet at the site—to enable quick deployment without complex setup.
+
+The general topic focuses on autonomous drone path planning for SAR operations, where drones must cover areas efficiently while avoiding obstacles and optimizing for factors like distance and altitude. The code implements this by decomposing search polygons, assigning tasks to drones, and generating waypoint paths.
 
 ## Features
 - **Polygon Decomposition**: Splits search areas into flyable cells, accounting for holes and UAV constraints.
@@ -29,7 +33,7 @@ PathPlanner/
 ├── tests/                   # Test configurations
 │   └── test_cases.py        # Predefined test cases with GPS data
 ├── results/                 # Output directory for plots and logs
-└── test_results/            # Secondary folder for test results (e.g., mission files, plots from test runs)
+└── missions/                # Directory for generated mission files
 ```
 
 ## Installation
@@ -96,19 +100,6 @@ results = run_path_planner(
     num_uavs=1
 )
 ```
-
-## Test Results
-Test results are stored in the `test_results/` folder, including:
-- **Mission Files**: QGroundControl .plan files for each UAV.
-- **Plots**: Decomposition visualizations, path plots, and assignment diagrams.
-- **Logs**: Console output with path distances and costs.
-
-Example test results for the Stubaier Gletscher case (1 UAV):
-- Mission file: `UAV0_mission.plan`
-- Plots: `debug_decomposed_cells.png`, `path_plot.png`
-- Path distance: ~500m, optimized for coverage.
-
-Run tests and check `test_results/` for outputs.
 
 ## Configuration
 - **Environment Variables**:
