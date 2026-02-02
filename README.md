@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project was developed as a semester project to explore path planning for multi-drone search and rescue (SAR) missions. It serves as a foundational tool for planning efficient paths for 1-4 drones to systematically search defined areas. In real-world applications, inputs could be simplified to just GPS points for the search area—such as drawing a rectangle on a tablet at the site—to enable quick deployment without complex setup.
+This project was developed as a semester project to explore path planning for multi-drone search and rescue (SAR) missions. It serves as a foundational tool for planning efficient paths for 1-4 drones to systematically search defined areas. In real-world applications, inputs could be simplified to just GPS points for the search area.
 
 The general topic focuses on autonomous drone path planning for SAR operations, where drones must cover areas efficiently while avoiding obstacles and optimizing for factors like distance and altitude. The code implements this by decomposing search polygons, assigning tasks to drones, and generating waypoint paths.
 
