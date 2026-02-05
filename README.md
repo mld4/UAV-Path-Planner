@@ -9,7 +9,7 @@ The general topic focuses on autonomous drone path planning for SAR operations, 
 ## Features
 - **Polygon Decomposition**: Splits search areas into flyable cells, accounting for holes and UAV constraints.
 - **Path Generation**: Creates back-and-forth (lawnmower) scanning paths with adjustable lane width and step size.
-- **Multi-UAV Support**: Optimizes UAV assignment using the Hungarian algorithm for equal or unequal cell counts.
+- **Multi-UAV Support**: Optimizes UAV assignment using the Jonker–Volgenant algorithm.
 - **GPS Integration**: Converts ENU coordinates to GPS for real-world missions.
 - **Mission Export**: Generates QGroundControl-compatible .plan files.
 - **Visualization**: Plots decomposition, paths, and assignments for debugging.
@@ -22,7 +22,7 @@ PathPlanner/
 ├── __main__.py              # Entry point for running as a module
 ├── main.py                  # Main script with default test inputs
 ├── core/                    # Core logic
-│   ├── assignment.py        # UAV-cell assignment (Hungarian algorithm)
+│   ├── assignment.py        # UAV-cell assignment (Jonker–Volgenant algorithm)
 │   ├── geometry.py          # Polygon decomposition and scanning
 │   └── planners.py          # Path planning algorithms
 ├── io/                      # Input/Output operations
