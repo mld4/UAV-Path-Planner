@@ -1,8 +1,10 @@
 # PathPlanner
 
+Autonomous multi-UAV coverage path planning framework for search and rescue missions.
+
 ## Introduction
 
-This project was developed as a semester project to explore path planning for multi-drone search and rescue (SAR) missions. It serves as a foundational tool for planning efficient search trajectories for 1–4 drones to systematically cover predefined areas. In real-world applications, the input could be simplified to GPS coordinates defining the search region.
+This project was developed as part of a university semester project to explore path planning for multi-drone search and rescue (SAR) missions. It serves as a foundational tool for planning efficient search trajectories for 1–4 drones to systematically cover predefined areas. In real-world applications, the system can directly operate on GPS coordinates defining the search region.
 
 The project focuses on autonomous drone path planning for SAR operations, where drones must cover areas efficiently while avoiding obstacles and optimizing criteria such as distance and altitude. The implementation decomposes search polygons, assigns tasks to individual drones, and generates optimized waypoint sequences for mission execution.
 
@@ -11,7 +13,7 @@ The project focuses on autonomous drone path planning for SAR operations, where 
 - **Polygon Decomposition**: Decomposes search areas into flyable cells while accounting for holes, obstacles, and UAV constraints.  
 - **Coverage Path Planning**: Generates structured back-and-forth (lawnmower) coverage patterns with configurable lane width and step size.  
 - **Multi-UAV Task Allocation**: Optimizes drone assignment using the Jonker–Volgenant algorithm to minimize overall mission cost.  
-- **Geodetic Integration**: Converts local ENU coordinates into GPS coordinates for real-world deployment.  
+- **Geodetic Integration**: Converts local ENU coordinates to GPS coordinates for real-world deployment.  
 - **Mission Export**: Produces QGroundControl-compatible `.plan` files for direct execution.  
 - **Visualization Tools**: Visualizes area decomposition, coverage paths, and UAV assignments for validation and debugging.  
 - **Modular Architecture**: Clear separation of core algorithms, I/O handling, utility functions, and test modules.
@@ -64,6 +66,15 @@ PathPlanner/
      export QGC_MISSIONS_DIR="/path/to/Missions"
      ```
 
+## Requirements
+
+- Python 3.8+
+- NumPy
+- Shapely
+- SciPy
+- Matplotlib
+- pymap3d
+
 ## Usage
 ### Basic Run
 
@@ -79,14 +90,14 @@ This generates paths, plots, and mission files in the configured mission directo
 Use predefined test cases from `tests/test_cases.py`:
 ```python
 from tests.test_cases import test_case_graz_4uavs
-from main import run_path_planner
+from PathPlanner.core.planners import run_path_planner
 
 # Load test case
 config = test_case_graz_4uavs
 run_path_planner(**config)
 ```
 
-### API Usage
+### Programmatic Usage (API)
 
 Import and call the planner directly:
 
