@@ -2,18 +2,20 @@
 
 ## Introduction
 
-This project was developed as a semester project to explore path planning for multi-drone search and rescue (SAR) missions. It serves as a foundational tool for planning efficient paths for 1-4 drones to systematically search defined areas. In real-world applications, inputs could be simplified to just GPS points for the search area.
+This project was developed as a semester project to explore path planning for multi-drone search and rescue (SAR) missions. It serves as a foundational tool for planning efficient search trajectories for 1–4 drones to systematically cover predefined areas. In real-world applications, the input could be simplified to GPS coordinates defining the search region.
 
-The general topic focuses on autonomous drone path planning for SAR operations, where drones must cover areas efficiently while avoiding obstacles and optimizing for factors like distance and altitude. The code implements this by decomposing search polygons, assigning tasks to drones, and generating waypoint paths.
+The project focuses on autonomous drone path planning for SAR operations, where drones must cover areas efficiently while avoiding obstacles and optimizing criteria such as distance and altitude. The implementation decomposes search polygons, assigns tasks to individual drones, and generates optimized waypoint sequences for mission execution.
 
 ## Features
-- **Polygon Decomposition**: Splits search areas into flyable cells, accounting for holes and UAV constraints.
-- **Path Generation**: Creates back-and-forth (lawnmower) scanning paths with adjustable lane width and step size.
-- **Multi-UAV Support**: Optimizes UAV assignment using the Jonker–Volgenant algorithm.
-- **GPS Integration**: Converts ENU coordinates to GPS for real-world missions.
-- **Mission Export**: Generates QGroundControl-compatible .plan files.
-- **Visualization**: Plots decomposition, paths, and assignments for debugging.
-- **Modular Design**: Clean separation of core logic, I/O, utilities, and tests.
+
+- **Polygon Decomposition**: Decomposes search areas into flyable cells while accounting for holes, obstacles, and UAV constraints.  
+- **Coverage Path Planning**: Generates structured back-and-forth (lawnmower) coverage patterns with configurable lane width and step size.  
+- **Multi-UAV Task Allocation**: Optimizes drone assignment using the Jonker–Volgenant algorithm to minimize overall mission cost.  
+- **Geodetic Integration**: Converts local ENU coordinates into GPS coordinates for real-world deployment.  
+- **Mission Export**: Produces QGroundControl-compatible `.plan` files for direct execution.  
+- **Visualization Tools**: Visualizes area decomposition, coverage paths, and UAV assignments for validation and debugging.  
+- **Modular Architecture**: Clear separation of core algorithms, I/O handling, utility functions, and test modules.
+
 
 ## Project Structure
 ```
@@ -52,23 +54,31 @@ PathPlanner/
    - For development, use `pip install -e .` if a `setup.py` is added.
 
 3. **Optional: QGroundControl Setup**:
-   - Set the mission export directory (default is `PathPlanner/missions/`):
-     ```bash
-     export QGC_MISSIONS_DIR="/path/to/your/QGroundControl/Missions"
-     ```
+   - Set the environment variable `QGC_MISSIONS_DIR` to your QGroundControl missions folder.
+   **Windows (PowerShell):**
+   ```powershell
+   setx QGC_MISSIONS_DIR "C:\Path\To\Missions"
+   ```
+   **macOS/Linux (bash/zsh):**
+   ```
+   export QGC_MISSIONS_DIR="/path/to/Missions"
+   ```
 
 ## Usage
 ### Basic Run
+
 Run with default test inputs (simple rectangle, 1 UAV):
 ```bash
 python -m PathPlanner
 ```
-This generates paths, plots, and mission files in `results/` and `missions/`.
+This generates paths, plots, and mission files in the configured mission directory 
+(default: `PathPlanner/missions/` or the directory defined via `QGC_MISSIONS_DIR`).
 
 ### Custom Test Cases
+
 Use predefined test cases from `tests/test_cases.py`:
 ```python
-from tests.test_cases import test_case_stubaier
+from tests.test_cases import test_case_graz_4uavs
 from main import run_path_planner
 
 # Load test case
@@ -77,27 +87,20 @@ run_path_planner(**config)
 ```
 
 ### API Usage
-Import and use functions directly:
+
+Import and call the planner directly:
+
 ```python
+from pathlib import Path
 from PathPlanner.core.planners import run_path_planner
+from tests.test_cases import test_case_graz_4uavs
 
-# Define inputs
-poly_gps = [(0, 0), (1, 0), (1, 1), (0, 1)]  # Search area
-holes_gps = []  # No holes
-init_pos_uavs_gps = [(0.5, 0.5)]  # UAV position
-# ... other params ...
+config = test_case_graz_4uavs
 
-results = run_path_planner(
-    RESULTS_DIR=Path("results"),
-    mission_results_dir=Path("missions"),
-    poly_gps=poly_gps,
-    holes_gps=holes_gps,
-    init_pos_uavs_gps=init_pos_uavs_gps,
-    terrain_alt=0,
-    mission_agl=10,
-    lane_width=10,
-    step_size=10,
-    num_uavs=1
+run_path_planner(
+    Path("missions"),
+    Path("missions"),
+    **config
 )
 ```
 
