@@ -60,7 +60,7 @@ PathPlanner/
    setx QGC_MISSIONS_DIR "C:\Path\To\Missions"
    ```
    **macOS/Linux (bash/zsh):**
-   ```
+   ```bash
    export QGC_MISSIONS_DIR="/path/to/Missions"
    ```
 
