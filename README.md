@@ -82,7 +82,7 @@ from tests.test_cases import test_case_graz_4uavs
 from main import run_path_planner
 
 # Load test case
-config = test_case_stubaier
+config = test_case_graz_4uavs
 run_path_planner(**config)
 ```
 
