@@ -55,14 +55,14 @@ PathPlanner/
 
 3. **Optional: QGroundControl Setup**:
    - Set the environment variable `QGC_MISSIONS_DIR` to your QGroundControl missions folder.
-   **Windows (PowerShell):**
-   ```powershell
-   setx QGC_MISSIONS_DIR "C:\Path\To\Missions"
-   ```
-   **macOS/Linux (bash/zsh):**
-   ```bash
-   export QGC_MISSIONS_DIR="/path/to/Missions"
-   ```
+     **Windows (PowerShell):**
+     ```powershell
+     setx QGC_MISSIONS_DIR "C:\Path\To\Missions"
+     ```
+     **macOS/Linux (bash/zsh):**
+     ```bash
+     export QGC_MISSIONS_DIR="/path/to/Missions"
+     ```
 
 ## Usage
 ### Basic Run
